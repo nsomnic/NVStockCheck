@@ -41,7 +41,7 @@ namespace NVStockCheck
 
         private async Task CheckForUpdates()
         {
-            using (var mgr = UpdateManager.GitHubUpdateManager(""))
+            using (var mgr = UpdateManager.GitHubUpdateManager("https://github.com/nsomnic/NVStockCheck/releases/latest"))
             {
                 await mgr.Result.UpdateApp();
             }
