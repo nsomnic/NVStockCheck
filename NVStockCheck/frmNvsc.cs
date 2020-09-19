@@ -14,6 +14,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.IO;
 using System.Diagnostics;
 using System.Media;
+using Squirrel;
 
 namespace NVStockCheck
 {
@@ -24,6 +25,26 @@ namespace NVStockCheck
         {
             InitializeComponent();
 
+            AddVersionNumber();
+
+            CheckForUpdates();
+
+        }
+
+        private void AddVersionNumber()
+        {
+            //Get version number from assembly.
+            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            FileVersionInfo versionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+            this.Text += $" v.{versionInfo.FileVersion}"; 
+        }
+
+        private async Task CheckForUpdates()
+        {
+            using (var mgr = UpdateManager.GitHubUpdateManager(""))
+            {
+                await mgr.Result.UpdateApp();
+            }
         }
 
         public Dictionary<string, string> productsList = new Dictionary<string, string>();

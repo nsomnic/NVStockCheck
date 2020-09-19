@@ -17,7 +17,7 @@ namespace NVStockCheck
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmStartup());
+            Application.Run(new frmNvsc());
         }
     }
 }
