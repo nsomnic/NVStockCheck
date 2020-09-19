@@ -14,7 +14,6 @@ using System.Security.Cryptography.X509Certificates;
 using System.IO;
 using System.Diagnostics;
 using System.Media;
-using Squirrel;
 
 namespace NVStockCheck
 {
@@ -27,21 +26,7 @@ namespace NVStockCheck
 
             AddVersionNumber();
 
-            Task.Run(async () =>
-            {
-                try
-                {
-                    using (var mgr = UpdateManager.GitHubUpdateManager("https://github.com/nsomnic/NVStockCheck"))
-                    {
-                        await mgr.Result.UpdateApp();
-                    }
-                }
-                catch(Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-                
-            });
+           
 
         }
 
@@ -53,21 +38,7 @@ namespace NVStockCheck
             this.Text += $" v.{versionInfo.FileVersion}"; 
         }
 
-        //private async Task CheckForUpdates()
-        //{
-        //    try
-        //    {
-        //        using (var mgr = UpdateManager.GitHubUpdateManager("https://github.com/nsomnic/NVStockCheck"))
-        //        {
-        //            await mgr.Result.UpdateApp();
-        //        }
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        MessageBox.Show(ex.ToString());
-        //    }
-           
-        //}
+       
 
         public Dictionary<string, string> productsList = new Dictionary<string, string>();
 
