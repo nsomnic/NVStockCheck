@@ -14,9 +14,10 @@ namespace NVStockCheck
         [STAThread]
         static void Main()
         {
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmNvsc());
+            Application.Run(new frmStartup());
         }
     }
 }
