@@ -27,7 +27,21 @@ namespace NVStockCheck
 
             AddVersionNumber();
 
-            CheckForUpdates();
+            Task.Run(async () =>
+            {
+                try
+                {
+                    using (var mgr = UpdateManager.GitHubUpdateManager("https://github.com/nsomnic/NVStockCheck"))
+                    {
+                        await mgr.Result.UpdateApp();
+                    }
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                
+            });
 
         }
 
@@ -39,13 +53,21 @@ namespace NVStockCheck
             this.Text += $" v.{versionInfo.FileVersion}"; 
         }
 
-        private async Task CheckForUpdates()
-        {
-            using (var mgr = UpdateManager.GitHubUpdateManager("https://github.com/nsomnic/NVStockCheck/releases/latest"))
-            {
-                await mgr.Result.UpdateApp();
-            }
-        }
+        //private async Task CheckForUpdates()
+        //{
+        //    try
+        //    {
+        //        using (var mgr = UpdateManager.GitHubUpdateManager("https://github.com/nsomnic/NVStockCheck"))
+        //        {
+        //            await mgr.Result.UpdateApp();
+        //        }
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        MessageBox.Show(ex.ToString());
+        //    }
+           
+        //}
 
         public Dictionary<string, string> productsList = new Dictionary<string, string>();
 
